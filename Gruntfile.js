@@ -17,10 +17,11 @@ module.exports = function(grunt) {
 
 		uglify: {
 			options: {
-				sourceMap: 'lib/srvmock.map'
+				sourceMap: '../srvmock.map'
 			},
 			build: {
-				src: 'src/srvmock-<%=pkg.version%>.js',
+				//src: 'src/srvmock-<%=pkg.version%>.js',
+				src: ['src/zon.js', 'src/srvmock.js'],
 				dest: 'lib/srvmock.min.js'
 			}
 		},
@@ -28,7 +29,8 @@ module.exports = function(grunt) {
 		watch: {
 			scripts: {
 				files: ['src/*'],
-				tasks: ['concat', 'uglify']
+				//tasks: ['concat', 'uglify']
+				tasks: ['uglify']
 			}
 		}
 
