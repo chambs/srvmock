@@ -13,7 +13,6 @@
 	*/
 
 	/**********Schema CRUD********/
-
 	//some constants
 	var SCHEMA = zon('SCHEMA'),
 		LOREM = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent fringilla lorem mauris, eget suscipit odio pulvinar eget. Sed gravida, mi ut eleifend mollis, odio nunc posuere risus, ut placerat lectus mi eu sapien. Proin sed velit in libero consectetur pulvinar a non augue. Aliquam a urna in est tempus porta at quis orci. Praesent semper neque enim, at mollis purus semper sit amet. Ut hendrerit mi non mauris consectetur, quis auctor est vulputate. Morbi lobortis rhoncus imperdiet. Integer sit amet pulvinar mi. Praesent aliquam sapien quis nunc adipiscing viverra.';
@@ -45,7 +44,7 @@
 	/**********END OF - Schema CRUD********/
 
 	/******Data generator************/
-	function generateData(schema) {
+	function generateData(schema, sg, ng) {
 		//read the schema and generate an empty row data
 		var fields = schema.fields,
 			field,
@@ -53,21 +52,34 @@
 			i = 0,
 			data = {};
 
+		sg = sg || stringGen;
+		ng = ng || numberGen;
+
 
 		for(i; i < len; i++) {
 			field = fields[i];
 
 			if(field.type === 'number') {
-				data[field.name] = ~~(Math.random() * Math.pow(10, field.size));
+				data[field.name] = ng(field.size);
 			} else {
-				data[field.name] = LOREM.substr(~~(Math.random() * 15), field.size);
+				data[field.name] = sg(field.size);
 			}
 		}
 
 		return data;
-
-
 	}
+
+	//String generator
+	function stringGen(size) {
+		return LOREM.substr(~~(Math.random() * 100), size);
+	}
+
+	//Number generator
+	function numberGen(size) {
+		return ~~(Math.random() * Math.pow(10, size));
+	}
+
+
 	/******END OF - Data generator***/
 
 
@@ -75,17 +87,28 @@
 	/******************/
 
 	//returns a list of fake data based on a schema
-	function httpGet(schemaName, qt) {
+	function httpGet(schemaName, qt, sg, ng) {
 		var rows = [],
 			i = 0,
 			schema = SCHEMA.get(schemaName);
 
-		if(!schema) {
-			throw new Error("Schema '" + schemaName + "' not found");
-		}
+		//retrive data from the localStorage data
+		zon(schemaName + '_DATA').each(function(index, rowId, data) {
+			//uses zon's id as backup, in case the schema hasn't one
+			data._id = rowId;
+			rows.push(data);
+		});
 
-		for(i; i < qt; i++) {
-			rows.push(generateData(schema));
+		//if qt is passed, returns a list of ugly fake data of length = qt
+		//according to the schema
+		if(qt) {
+			if(!schema) {
+				throw new Error("Schema '" + schemaName + "' not found");
+			}
+
+			for(i; i < qt; i++) {
+				rows.push(generateData(schema, sg, ng));
+			}
 		}
 
 		return rows;
@@ -93,7 +116,25 @@
 
 
 	//insert
-	function httpPost(){}
+	function httpPost(schemaName, data) {
+		var schema = SCHEMA.get(schemaName),
+			newRow = {},
+			fields = schema.fields,
+			field,
+			len = fields.length,
+			i = 0,
+			rowId;
+
+		for(i; i < len; i++) {
+			field = fields[i];
+			newRow[field.name] = data[field.name];
+		}
+
+		rowId = zon(schemaName + '_DATA').add(newRow);
+
+		return rowId;
+	}
+
 	/******************/
 
 	window.srvmock = {
@@ -102,7 +143,8 @@
 		removeSchema: removeSchema,
 		getSchemaNames: getSchemaNames,
 
-		httpGet: httpGet
+		httpGet: httpGet,
+		httpPost: httpPost
 	};
 
 })(this);
