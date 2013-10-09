@@ -21,7 +21,7 @@ You must first define schemas, like this:
 	};
 ```
 
-And then you must register this schema in order to srcmock generate content for you:
+And then you must register this schema in order to srvmock generate content for you:
 
 ```javascript
 	srvmock.setSchema(mySchema);
