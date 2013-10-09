@@ -174,7 +174,6 @@
 })(document, window);
 ;(function(window) {
 
-
 	/*
 	Schema must follow these rules:
 
