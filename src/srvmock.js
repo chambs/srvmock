@@ -87,6 +87,7 @@
 	/******************/
 
 	//returns a list of fake data based on a schema
+	//plus the real data persisted on the localStorage
 	function httpGet(schemaName, qt, sg, ng) {
 		var rows = [],
 			i = 0,
@@ -114,6 +115,13 @@
 		return rows;
 	}
 
+	//returns a row persisted on the localStorage
+	function httpGetOne(schemaName, rowId) {
+		var schema = SCHEMA.get(schemaName);
+
+		//retrive data from the localStorage data
+		return zon(schemaName + '_DATA').get(rowId);
+	}
 
 	//insert
 	function httpPost(schemaName, data) {
@@ -144,6 +152,7 @@
 		getSchemaNames: getSchemaNames,
 
 		httpGet: httpGet,
+		httpGetOne: httpGetOne,
 		httpPost: httpPost
 	};
 
