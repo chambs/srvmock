@@ -2,8 +2,34 @@
 <head>
 	<meta charset="utf-8">
 	<title>SrvMock - Mocking your server since yesterday</title>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
 <body>
+
+	<div id="frm">
+		<h3>User registration</h3>
+		<div>
+			<div class="field">First name</div>
+			<div><input name="firstname"></div>
+		</div>
+		
+		<div>
+			<div class="field">Last name</div>
+			<div><input name="lastname"></div>
+		</div>
+		
+		<div>
+			<div class="field">E-mail</div>
+			<div><input name="email"></div>
+		</div>
+
+		<div>
+			<div><input type="button" class="btn-register" value="Register"></div>
+		</div>
+
+	</div>
+
+	<ul id="user-list"></ul>
 
 	<div id="current-user">
 		<h3>User info</h3>
@@ -18,8 +44,6 @@
 		</div>
 		
 	</div>
-
-	<ul id="user-list"></ul>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script type="text/javascript" src="lib/srvmock.min.js"></script>

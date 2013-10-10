@@ -1,0 +1,38 @@
+body {
+	font-family: arial, verdana, helvetica;
+	text-shadow: 1px 1px 0px #fff;
+	color: #444;
+}
+
+#frm, #current-user, #user-list {
+	float: left;
+	width: 25%;
+	height: 400px;
+	background-color: #eee;
+	margin: 5px;
+	padding: 10px;
+	border-radius: 6px;
+}
+
+.field {
+	font-weight: bold;
+}
+
+#user-list {
+	list-style: none;
+	overflow-y: scroll;
+}
+
+#user-list li {
+	padding: 3px;
+	border-radius: 6px;
+}
+
+#user-list li:hover {
+	cursor: pointer;
+	background-color: #ddd;
+}
+
+#frm {
+	height: 250px;
+}
