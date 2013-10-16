@@ -1,0 +1,24 @@
+{
+  "name": "srvmock",
+  "version": "0.0.1",
+  "homepage": "https://github.com/chambs/srvmock",
+  "description": "A simple server mock",
+  "main": "lib/srvmock.min.js",
+  "keywords": [
+    "server",
+    "simulator",
+    "json",
+    "mock"
+  ],
+  "authors": [
+    "Willian Carvalho"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
