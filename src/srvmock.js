@@ -1,5 +1,5 @@
-(function(window) {
-
+(function() {
+	console.log(this, '<<<<');
 	/*
 	Schema must follow these rules:
 
@@ -145,7 +145,7 @@
 
 	/******************/
 
-	window.srvmock = {
+	this.srvmock = {
 		setSchema: setSchema,
 		getSchema: getSchema,
 		removeSchema: removeSchema,
@@ -156,4 +156,4 @@
 		httpPost: httpPost
 	};
 
-})(this);
+}).call(this);

@@ -1,6 +1,6 @@
 {
   "name": "srvmock",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A server mock. You should use it if you have to wait something on the backend to be coded",
   "author": {
     "name": "Willian Carvalho",
