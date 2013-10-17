@@ -173,7 +173,6 @@
     window.zon = tbls;
 })(document, window);
 ;(function() {
-	console.log(this, '<<<<');
 	/*
 	Schema must follow these rules:
 

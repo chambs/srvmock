@@ -1,5 +1,4 @@
 (function() {
-	console.log(this, '<<<<');
 	/*
 	Schema must follow these rules:
 
